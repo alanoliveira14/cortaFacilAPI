@@ -67,8 +67,12 @@ public class UsuarioController {
                             .build())
                     .build(), HttpStatus.BAD_REQUEST);
         }
+
+        usuarioEntity.setSenha(null);
+
         return new ResponseEntity<>(Resposta.builder()
                 .mensagem("Usuário inserido com sucesso")
+                .object(usuarioEntity)
                 .build(), HttpStatus.OK);
     }
 

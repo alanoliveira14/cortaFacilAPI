@@ -8,5 +8,6 @@ public interface Usuario extends JpaRepository<UsuarioEntity,Integer> {
     UsuarioEntity findByUsuarioAndSenhaAndAtivo(String usuario, String senha, Integer ativo);
     UsuarioEntity findByIdUsuario(Integer id);
     Integer countUsuarioEntityByUsuario(String usuario);
+    UsuarioEntity findUsuarioEntityByToken(String token);
 
 }

@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface Barbeiro extends JpaRepository<BarbeiroEntity, Integer> {
 
-    BarbeiroEntity getBarbeiroEntityByIdBarbeiro(Integer idBarbeiro);
+    BarbeiroEntity findBarbeiroEntityByIdBarbeiro(Integer idBarbeiro);
 
     List<BarbeiroEntity> findBarbeiroEntityByCidadeLike(String cidade);
+
+    BarbeiroEntity findBarbeiroEntityByIdUsuario(Integer idUsuario);
 }

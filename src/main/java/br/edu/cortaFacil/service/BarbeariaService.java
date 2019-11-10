@@ -2,7 +2,11 @@ package br.edu.cortaFacil.service;
 
 import br.edu.cortaFacil.aux.Logradouro;
 import br.edu.cortaFacil.dao.Barbeiro;
+import br.edu.cortaFacil.dao.CortesBarbeiro;
+import br.edu.cortaFacil.dao.Usuario;
 import br.edu.cortaFacil.entity.BarbeiroEntity;
+import br.edu.cortaFacil.entity.CortesBarbeiroEntity;
+import br.edu.cortaFacil.entity.UsuarioEntity;
 import com.google.gson.Gson;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -19,12 +23,16 @@ import java.io.IOException;
 @Component
 public class BarbeariaService {
 
-    public BarbeariaService(Barbeiro barbeiro){
-
-    }
+    public BarbeariaService(Barbeiro barbeiro, Usuario usuario, CortesBarbeiro cortesBarbeiro){}
 
     @Autowired
     Barbeiro barbeiroDAO;
+
+    @Autowired
+    Usuario usuarioDAO;
+
+    @Autowired
+    CortesBarbeiro cortesDAO;
 
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -54,6 +62,19 @@ public class BarbeariaService {
         Logradouro logradouro = new Gson().fromJson(result, Logradouro.class);
 
         barbeiroEntity.setCidade(logradouro.getLocalidade());
+
+    }
+
+
+    public void cadastraCorte(CortesBarbeiroEntity cortesBarbeiroEntity, String token){
+
+        UsuarioEntity usuario = usuarioDAO.findUsuarioEntityByToken(token);
+
+        BarbeiroEntity barber = barbeiroDAO.findBarbeiroEntityByIdUsuario(usuario.getIdUsuario());
+
+        cortesBarbeiroEntity.setIdBarbearia(barber.getIdBarbeiro());
+
+        cortesDAO.save(cortesBarbeiroEntity);
 
     }
 

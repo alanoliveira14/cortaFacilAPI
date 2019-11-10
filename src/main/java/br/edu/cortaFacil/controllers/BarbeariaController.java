@@ -3,7 +3,9 @@ package br.edu.cortaFacil.controllers;
 import br.edu.cortaFacil.aux.Error;
 import br.edu.cortaFacil.aux.Resposta;
 import br.edu.cortaFacil.dao.Barbeiro;
+import br.edu.cortaFacil.dao.CortesBarbeiro;
 import br.edu.cortaFacil.entity.BarbeiroEntity;
+import br.edu.cortaFacil.entity.CortesBarbeiroEntity;
 import br.edu.cortaFacil.service.BarbeariaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class BarbeariaController {
 
     @Autowired
     Barbeiro barbeiroDAO;
+
+    @Autowired
+    CortesBarbeiro cortesBarbeiroDAO;
 
     @Autowired
     BarbeariaService barbeariaService;
@@ -59,7 +64,7 @@ public class BarbeariaController {
     @GetMapping("/busca/barbearia")
     ResponseEntity<Resposta> buscaBarbearia(@RequestHeader(value = "token") String token){
 
-        BarbeiroEntity barbeiro = barbeiroDAO.getBarbeiroEntityByIdBarbeiro(1);
+        BarbeiroEntity barbeiro = barbeiroDAO.findBarbeiroEntityByIdBarbeiro(1);
 
         if(barbeiro == null || barbeiro.getIdBarbeiro() == null){
             return new ResponseEntity<>(Resposta.builder()
@@ -92,6 +97,29 @@ public class BarbeariaController {
         return new ResponseEntity<>(Resposta.builder()
                 .object(barbeiroEntityByCidadeLike)
                 .build(), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/corte/cadastrar")
+    ResponseEntity<Resposta> cadastrarCorte(@RequestBody CortesBarbeiroEntity cortesBarbeiroEntity, @RequestHeader(value = "token") String token){
+
+        try{
+
+            barbeariaService.cadastraCorte(cortesBarbeiroEntity, token);
+
+        }catch (Exception e){
+
+            return new ResponseEntity<>(Resposta.builder()
+                    .erro(Error.builder()
+                            .mensagem("Erro ao cadastrar corte!")
+                            .build())
+                    .build(), HttpStatus.BAD_REQUEST);
+        }
+
+
+        return new ResponseEntity<>(Resposta.builder()
+                .mensagem("Corte cadastrado com sucesso!")
+                .build(), HttpStatus.BAD_REQUEST);
 
     }
 
