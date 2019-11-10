@@ -1,9 +1,12 @@
 package br.edu.cortaFacil.controllers;
 
+import br.edu.cortaFacil.aux.Error;
 import br.edu.cortaFacil.aux.Resposta;
+import br.edu.cortaFacil.aux.UsuarioIndisponivelException;
 import br.edu.cortaFacil.aux.Utils;
 import br.edu.cortaFacil.dao.Usuario;
 import br.edu.cortaFacil.entity.UsuarioEntity;
+import br.edu.cortaFacil.service.UsuarioService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,9 @@ public class UsuarioController {
     Usuario usuario;
 
     Utils utils = new Utils();
+
+    @Autowired
+    UsuarioService usuarioService;
 
     @GetMapping("/")
     ResponseEntity<String> teste(){
@@ -39,19 +45,26 @@ public class UsuarioController {
     ResponseEntity<Resposta> cadastra(@RequestBody UsuarioEntity usuarioEntity){
 
         try {
+            usuarioService.cadastraUsuario(usuarioEntity);
+        }
+        catch (UsuarioIndisponivelException usu){
 
-            usuarioEntity.setSenha(utils.getB64(usuarioEntity.getSenha()));
+            log.error("Usuário já cadastrado", usu);
 
-            usuarioEntity.setAtivo(1);
-
-            usuario.save(usuarioEntity);
+            return new ResponseEntity<>(Resposta.builder()
+                    .erro(Error.builder()
+                            .mensagem(usu.getMessage())
+                            .build())
+                    .build(), HttpStatus.BAD_REQUEST);
         }
         catch (Exception e){
 
             log.error("Ocorreu um erro ao executar o insert!", e);
 
             return new ResponseEntity<>(Resposta.builder()
-                    .mensagem("Usuário não cadastrado devido ao um erro interno")
+                    .erro(Error.builder()
+                            .mensagem("Usuário não cadastrado devido ao um erro interno")
+                            .build())
                     .build(), HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(Resposta.builder()
@@ -76,7 +89,9 @@ public class UsuarioController {
             log.error("Ocorreu um erro ao realizar busca!", e);
 
             return new ResponseEntity<>(Resposta.builder()
-                    .mensagem("Ocorreu um erro ao realizar busca")
+                    .erro(Error.builder()
+                            .mensagem("Ocorreu um erro ao realizar busca")
+                            .build())
                     .build(), HttpStatus.BAD_REQUEST);
         }
 

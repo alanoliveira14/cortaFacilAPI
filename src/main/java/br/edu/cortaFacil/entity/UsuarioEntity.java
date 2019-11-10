@@ -31,4 +31,7 @@ public class UsuarioEntity {
     @Column(name = "ativo")
     private Integer ativo;
 
+    @Column(name = "token")
+    private String token;
+
 }

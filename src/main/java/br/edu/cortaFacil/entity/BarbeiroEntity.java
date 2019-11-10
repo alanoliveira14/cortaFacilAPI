@@ -31,7 +31,7 @@ public class BarbeiroEntity {
     private String nomeBarbearia;
 
     @Column(name = "CEP")
-    private Integer cep;
+    private String cep;
 
     @Column(name = "numero")
     private Integer numero;

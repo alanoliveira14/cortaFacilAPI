@@ -1,8 +1,10 @@
 package br.edu.cortaFacil.controllers;
 
+import br.edu.cortaFacil.aux.Error;
 import br.edu.cortaFacil.aux.Resposta;
 import br.edu.cortaFacil.dao.Barbeiro;
 import br.edu.cortaFacil.entity.BarbeiroEntity;
+import br.edu.cortaFacil.service.BarbeariaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,9 @@ public class BarbeariaController {
     @Autowired
     Barbeiro barbeiroDAO;
 
+    @Autowired
+    BarbeariaService barbeariaService;
+
     @GetMapping("/teste")
     ResponseEntity<BarbeiroEntity> barbeiroEntityResponseEntity(){
 
@@ -30,14 +35,17 @@ public class BarbeariaController {
 
         try{
 
-            barbeiroDAO.save(barbeiroEntity);
+            barbeariaService.cadastrar(barbeiroEntity);
+
 
         }catch (Exception e){
 
             log.error("Erro ao realiar cadastro!", e);
 
             return new ResponseEntity<>(Resposta.builder()
-                    .mensagem("Erro ao realizar cadastro!")
+                    .erro(Error.builder()
+                            .mensagem("Erro ao realizar cadastro!")
+                            .build())
                     .build(), HttpStatus.BAD_REQUEST);
 
         }
@@ -55,7 +63,9 @@ public class BarbeariaController {
 
         if(barbeiro == null || barbeiro.getIdBarbeiro() == null){
             return new ResponseEntity<>(Resposta.builder()
-                    .mensagem("Erro interno")
+                    .erro(Error.builder()
+                            .mensagem("Erro interno")
+                            .build())
                     .build(), HttpStatus.BAD_REQUEST);
         }
 
@@ -73,7 +83,9 @@ public class BarbeariaController {
         if(barbeiroEntityByCidadeLike == null || barbeiroEntityByCidadeLike.isEmpty()){
 
             return new ResponseEntity<>(Resposta.builder()
-                    .mensagem("Erro interno")
+                    .erro(Error.builder()
+                            .mensagem("Erro interno")
+                            .build())
                     .build(), HttpStatus.BAD_REQUEST);
         }
 
