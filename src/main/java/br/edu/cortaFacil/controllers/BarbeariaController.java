@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -62,9 +63,9 @@ public class BarbeariaController {
     }
 
     @GetMapping("/busca/barbearia")
-    ResponseEntity<Resposta> buscaBarbearia(@RequestHeader(value = "token") String token){
+    ResponseEntity<Resposta> buscaBarbearia(@RequestHeader(value = "barbearia") Integer id){
 
-        BarbeiroEntity barbeiro = barbeiroDAO.findBarbeiroEntityByIdBarbeiro(1);
+        BarbeiroEntity barbeiro = barbeiroDAO.findBarbeiroEntityByIdBarbeiro(id);
 
         if(barbeiro == null || barbeiro.getIdBarbeiro() == null){
             return new ResponseEntity<>(Resposta.builder()
@@ -120,6 +121,29 @@ public class BarbeariaController {
         return new ResponseEntity<>(Resposta.builder()
                 .mensagem("Corte cadastrado com sucesso!")
                 .build(), HttpStatus.BAD_REQUEST);
+
+    }
+
+
+    @GetMapping("/corte/listar")
+    ResponseEntity<Resposta> listarCortes(@RequestParam Integer barbeiro){
+
+        List<CortesBarbeiroEntity> cortes = cortesBarbeiroDAO.findAllByIdBarbearia(barbeiro);
+
+        if(cortes == null || cortes.isEmpty()){
+            return new ResponseEntity<>(Resposta.builder()
+                    .erro(Error.builder()
+                            .mensagem("Barbeiro não possui cortes")
+                            .build())
+                    .object(Collections.EMPTY_LIST)
+                    .build(),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(Resposta.builder()
+                .object(cortes)
+                .build(),
+                HttpStatus.OK);
 
     }
 

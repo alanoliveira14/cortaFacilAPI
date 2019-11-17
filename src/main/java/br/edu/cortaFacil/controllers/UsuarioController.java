@@ -63,7 +63,7 @@ public class UsuarioController {
 
             return new ResponseEntity<>(Resposta.builder()
                     .erro(Error.builder()
-                            .mensagem("Usuário não cadastrado devido ao um erro interno")
+                            .mensagem("Usuário não cadastrado devido a um erro interno")
                             .build())
                     .build(), HttpStatus.BAD_REQUEST);
         }
@@ -71,7 +71,7 @@ public class UsuarioController {
         usuarioEntity.setSenha(null);
 
         return new ResponseEntity<>(Resposta.builder()
-                .mensagem("Usuário inserido com sucesso")
+                .mensagem("Usuário cadastrado com sucesso")
                 .object(usuarioEntity)
                 .build(), HttpStatus.OK);
     }
@@ -86,7 +86,6 @@ public class UsuarioController {
             usuarioEntity.setSenha(utils.getB64(usuarioEntity.getSenha()));
 
             user = usuario.findByUsuarioAndSenhaAndAtivo(usuarioEntity.getUsuario(), usuarioEntity.getSenha(), 1);
-            //user = usuario.findByIdUsuario(1);
         }
         catch (Exception e){
 
