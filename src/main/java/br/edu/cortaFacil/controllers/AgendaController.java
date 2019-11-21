@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/agenda")
 @Slf4j
 public class AgendaController {

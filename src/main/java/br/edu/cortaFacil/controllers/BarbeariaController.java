@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/barbeiro")
 @Slf4j
 public class BarbeariaController {
