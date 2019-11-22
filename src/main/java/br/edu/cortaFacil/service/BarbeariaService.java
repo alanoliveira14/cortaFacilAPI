@@ -10,7 +10,6 @@ import br.edu.cortaFacil.entity.UsuarioEntity;
 import com.google.gson.Gson;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -38,13 +37,13 @@ public class BarbeariaService {
 
     public void cadastrar(BarbeiroEntity barbeiroEntity) throws IOException {
 
-        getCidade(barbeiroEntity);
+        getEndereco(barbeiroEntity);
 
         barbeiroDAO.save(barbeiroEntity);
 
     }
 
-    private void getCidade(BarbeiroEntity barbeiroEntity) throws IOException {
+    private void getEndereco(BarbeiroEntity barbeiroEntity) throws IOException {
 
         StringBuilder url = new StringBuilder("https://viacep.com.br/ws/");
 
@@ -62,6 +61,12 @@ public class BarbeariaService {
         Logradouro logradouro = new Gson().fromJson(result, Logradouro.class);
 
         barbeiroEntity.setCidade(logradouro.getLocalidade());
+
+        barbeiroEntity.setBairro(logradouro.getBairro());
+
+        barbeiroEntity.setUf(logradouro.getUf());
+
+        barbeiroEntity.setRua(logradouro.getLogradouro());
 
     }
 

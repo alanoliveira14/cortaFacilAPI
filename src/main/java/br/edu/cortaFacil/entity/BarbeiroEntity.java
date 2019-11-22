@@ -48,6 +48,15 @@ public class BarbeiroEntity {
     @Column(name = "cidade")
     private String cidade;
 
+    @Column(name = "bairro")
+    private String bairro;
+
+    @Column(name = "uf")
+    private String uf;
+
+    @Column(name = "rua")
+    private String rua;
+
 }
 
 
