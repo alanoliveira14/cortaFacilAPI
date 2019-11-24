@@ -29,5 +29,8 @@ public class ClienteEntity {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "idUsuario")
+    private Integer idUsuario;
+
 
 }

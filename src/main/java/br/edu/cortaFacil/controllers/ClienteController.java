@@ -20,7 +20,7 @@ public class ClienteController {
     Cliente clienteDAO;
 
     @PostMapping("/cadastrar")
-    ResponseEntity<Resposta> novoCliente(ClienteEntity clienteEntity){
+    ResponseEntity<Resposta> novoCliente(@RequestBody ClienteEntity clienteEntity){
 
         try {
             clienteDAO.save(clienteEntity);

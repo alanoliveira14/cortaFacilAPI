@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface Agenda extends JpaRepository<AgendaEntity, Integer> {
 
-    List<AgendaEntity> findAllByIdBarbeariaAndData(Integer idBarbeiro, String data);
+    List<AgendaEntity> findAllByIdBarbeariaAndDataOrderByHoraInicioAsc(Integer idBarbeiro, String data);
 
     @Query(value = "select count(*) from agenda where (:horaCorte between horaInicio and horaFim) or ((select addtime(:horaCorte, sec_to_time(:tempoCorte * 60) ) ) between horaInicio and horaFim) and data = :dataCorte", nativeQuery = true)
     Integer findNumeroDeCortesNoHorario(@Param("horaCorte") String horaCorte, @Param("tempoCorte") Integer tempoCorte, @Param("dataCorte") String dataCorte);

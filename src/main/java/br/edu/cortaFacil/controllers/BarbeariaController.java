@@ -31,10 +31,14 @@ public class BarbeariaController {
     @Autowired
     BarbeariaService barbeariaService;
 
-    @GetMapping("/teste")
-    ResponseEntity<BarbeiroEntity> barbeiroEntityResponseEntity(){
+    @GetMapping("/lista/cidades")
+    ResponseEntity<Resposta> barbeiroEntityResponseEntity(){
 
-        return new ResponseEntity<>(new BarbeiroEntity(), HttpStatus.OK);
+        List<String> distinctByCidade = barbeiroDAO.findCidades();
+
+        return new ResponseEntity<>(Resposta.builder()
+                .object(distinctByCidade)
+                .build(), HttpStatus.OK);
     }
 
     @PostMapping("/cadastrar")
@@ -127,8 +131,12 @@ public class BarbeariaController {
 
 
     @GetMapping("/corte/listar")
-    ResponseEntity<Resposta> listarCortes(@RequestParam Integer barbeiro){
+    ResponseEntity<Resposta> listarCortes(@RequestParam Integer barbeiro, @RequestParam String tipo){
 
+        if(!"cliente".equalsIgnoreCase(tipo)) {
+            BarbeiroEntity barbeiroEntityByIdUsuario = barbeiroDAO.findBarbeiroEntityByIdUsuario(barbeiro);
+            barbeiro = barbeiroEntityByIdUsuario.getIdBarbeiro();
+        }
         List<CortesBarbeiroEntity> cortes = cortesBarbeiroDAO.findAllByIdBarbearia(barbeiro);
 
         if(cortes == null || cortes.isEmpty()){
@@ -147,5 +155,20 @@ public class BarbeariaController {
                 HttpStatus.OK);
 
     }
+
+
+    @GetMapping("/corte/encontra")
+    ResponseEntity<Resposta> cortePorId(@RequestParam Integer idCorte){
+
+        CortesBarbeiroEntity byIdCorte = cortesBarbeiroDAO.findByIdCorte(idCorte);
+
+        return new ResponseEntity<>(Resposta.builder()
+                .object(byIdCorte)
+                .build(),
+                HttpStatus.OK);
+
+    }
+
+
 
 }

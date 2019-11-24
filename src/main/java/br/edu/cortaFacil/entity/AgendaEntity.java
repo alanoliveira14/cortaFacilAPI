@@ -39,4 +39,10 @@ public class AgendaEntity {
     @Column(name = "horaFim")
     private String horaFim;
 
+    private String nomeCliente;
+
+    private String nomeCorte;
+
+    private Double preco;
+
 }
