@@ -28,9 +28,7 @@ public class AgendaService {
 
         CortesBarbeiroEntity corte = cortesBarbeiroDAO.findByIdCorte(agendaEntity.getIdCorte());
 
-
-
-        Integer numeroDeCortesNoHorario = agendaDAO.findNumeroDeCortesNoHorario(agendaEntity.getHoraInicio(), corte.getTempoMedio(),agendaEntity.getData());
+        Integer numeroDeCortesNoHorario = agendaDAO.findNumeroDeCortesNoHorarioDoBarbeiro(agendaEntity.getHoraInicio(), corte.getTempoMedio(),agendaEntity.getData(), agendaEntity.getIdBarbearia());
 
         if(numeroDeCortesNoHorario != null && numeroDeCortesNoHorario > 0){
             throw new AgendaException("Horário indisponível, já possui cortes agendados para o mesmo!");
