@@ -11,6 +11,24 @@ import java.util.List;
 
 public interface Agenda extends JpaRepository<AgendaEntity, Integer> {
 
+    /*
+    *
+    * DAO de agenda, usado para fazer as acoes de agenda junto ao banco de dados
+    *
+    * esse é o unico DAO onde as queries foram complexas o suficiente, para se fazer necessário escrever na mao
+    *
+    * usa-se o @Query para dizer pro SpringData que passaremos uma query personaliada para aquele método
+    * no meio da query, as palavras precedidas por ':' são parametros que serao trocados no momento da execucao pelas variaveis
+    * que estão em seguidas aos @Param, que possuem o mesmo nome
+    *
+    * os métodos que nao possuem query em cima, são aqueles em que o Data gera automaticamente a query, bastando apenas dizer oque se quer fazer
+    * no caso todos sao find, que indica que serão selects
+    *
+    * os save() querem dizer que serao feitos insert, eles estao direto nos controllers ou dentro dos services e sao metodos
+    * padroes do Data
+    *
+    * */
+
     List<AgendaEntity> findAllByIdBarbeariaAndDataOrderByHoraInicioAsc(Integer idBarbeiro, String data);
 
     @Query(value = "select count(*) from agenda where (:horaCorte between horaInicio and horaFim) or ((select addtime(:horaCorte, sec_to_time(:tempoCorte * 60) ) ) between horaInicio and horaFim) and data = :dataCorte", nativeQuery = true)

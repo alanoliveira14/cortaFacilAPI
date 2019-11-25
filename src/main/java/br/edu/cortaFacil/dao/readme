@@ -1,0 +1,11 @@
+DAO é a classe utilizada para fazer a comunicacao com o banco de dados
+é a partir de um DAO que fazemos insert, update, select e delete
+
+eles vao até o banco, executam a query e devolvem um objeto java que pode ser executado dentro da API
+
+
+como estamos usando SpringData, praticamente nenhuma query é escrita, somente aquelas que sao muito complexas e o Data nao lidaria
+bem com as mesmas
+
+o processo de select e insert é simplificado utilizando o Data, nao precisamos usar ResultSet, PrepareStatement e Connection
+o Data faz isso automagicamente, bastando apenas configurar o cando de dados no application.properties

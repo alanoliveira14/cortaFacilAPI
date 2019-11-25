@@ -10,6 +10,8 @@ import lombok.Setter;
 @Builder
 public class Error {
 
+    //entidade usada dentro da resposta pra mostrar pro frontEnd (tela) que ocorreu um erro e qual foi
+
     String mensagem;
 
 }

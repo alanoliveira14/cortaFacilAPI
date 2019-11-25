@@ -1,0 +1,6 @@
+como os controllers nao possuem regras de negocio nem coisas do tipo
+sao os services que fazem isso para nos
+
+isso é puramente por conveniencia e boas praticas de programacao
+
+este pacote realiza regras de negocio e coisas mais a fundo, sendo suas classes chamadas a partir de algum controlle

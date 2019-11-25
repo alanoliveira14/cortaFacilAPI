@@ -7,6 +7,13 @@ import java.util.Base64;
 
 public class Utils {
 
+    /*
+    * utils como o proprio nome diz, sao utilitarios da API
+    * usado por outras classes que possa interessar
+    *
+    * somente o getB64 está sendo utilizado no momento, que gera um base64 da senha, para ela nao ser grava em tipo texto
+    * no banco de dados
+    * */
 
     public String geraMD5Hash(String str) throws NoSuchAlgorithmException {
 

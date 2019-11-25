@@ -22,6 +22,20 @@ import java.util.List;
 @Slf4j
 public class BarbeariaController {
 
+    /*
+    *
+    * controller de barbearia - responsável por realizar todas ações que sao relacionadas aos barbeiros
+    *
+    * possui os metodos:
+    * criar um barbeiro
+    * listar os barbeiros de uma cidade
+    * listart as cidades em que temos um barbeiro cadastrado
+    * buscar infos de uma determinada barbearia
+    * cadastrar um corte para o barbeiro
+    * listar os cortes de um barbeiro
+    * buscar infos de um corte especifico
+    * */
+
     @Autowired
     Barbeiro barbeiroDAO;
 

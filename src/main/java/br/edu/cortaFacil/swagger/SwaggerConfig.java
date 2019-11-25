@@ -14,6 +14,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
+    /*
+    *
+    * Swagger é aquele cara que faz uma interface grafica para a API
+    * com seus metodos, qual o tipo, o que eles recebem e retornam (a tela verdinha)
+    *
+    * nao tem muito interesse pra voces isso, é mais para ajudar no desenvolvimento e execucao de destes das coisas
+    * */
+
     @Bean
     public Docket docketAPI(){
 

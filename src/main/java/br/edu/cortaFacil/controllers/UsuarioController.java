@@ -19,6 +19,17 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class UsuarioController {
 
+    /*
+    * controller responsavel pelas acoes referentes ao usuários da aplicacao
+    *
+    * o usuário é a nossa chave para a aplicacao funcionar, qualquer cliente ou barbeiro está associado a um usuário
+    *
+    * possui os métodos:
+    *
+    * cadastar um novo usuário (também verifica a disponibilidade do nome de usuário)
+    * autenticar - usado no login
+    *
+    * */
 
     @Autowired
     Usuario usuario;

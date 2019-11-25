@@ -9,6 +9,8 @@ import lombok.Setter;
 @Builder
 public class Logradouro {
 
+    //entidade que representa a resposta do viaCep, na hora que procuramos um endereço
+
     private String cep;
     private String logradouro;
     private String complemento;

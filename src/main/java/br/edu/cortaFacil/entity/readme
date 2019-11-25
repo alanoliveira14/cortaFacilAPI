@@ -1,0 +1,12 @@
+Entity é a classe que representa o banco de dados
+
+sao as classes que possuem os Get e Set padroes do Java, que voces já viram certamente me POO
+
+os Gets e Sets sao gerados dinamicanda graças a uma dependencia chamada Lombok, que está dentro deste projeto, assim poupando tempo de dev
+
+em cima de cada campo destes entities, em um @Column, que é uma anotação do SpringData pra mostrar que aquele atributo Java
+representa aquele campo dentro da tabela, no banco de dados
+
+o @Table tambem do Data, fala qual é a tabela do banco
+
+@Id fala quem é a PK da tabela

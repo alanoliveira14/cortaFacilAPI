@@ -1,0 +1,12 @@
+Controllers sao a camada da API que são expostas para o mundo
+
+são elas o meio de entrada e saída e por onde a toda comuniação é realizada, entre a API e o mundo externo, que as consome;
+
+Um controller trabalha da seguinta maneira:
+
+Se define qual será a rota/caminho correspondente para ele (url) e atribui-se um método a ele
+
+este método é um método Java como qualquer outro, ele possui uma entrada de valor, realiza uma ação e retorna algo
+
+basicamente, controllers nao possuem regras de negócio, essa camada é de implementação simples, recebe-se uma requisição nele,
+o controller direciona para a classe cujo a açao é necessária pra ser feita e devolve uma resposta para quem o chamou.

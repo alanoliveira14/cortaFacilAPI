@@ -16,6 +16,13 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class ClienteController {
 
+
+    /*
+    * controller usado para as acoes refentes ao cliente
+    * hoje só possuio metodo de cadastrar um cliente
+    * porem o histórico ficará neste controller também
+    * */
+
     @Autowired
     Cliente clienteDAO;
 

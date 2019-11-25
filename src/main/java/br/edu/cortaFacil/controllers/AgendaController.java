@@ -29,6 +29,31 @@ import java.util.Optional;
 @Slf4j
 public class AgendaController {
 
+    /*
+    *
+    * Controller de Agenda - responsavel por realizar todas as ações referentes ao agendamento
+    *
+    * possui duas rotas dentro dele:
+    * - rota que pesquisa horarios
+    * - rota que realiza um novo agendamento
+    * */
+
+    /*
+    * anotações utilizadas, representadas a partir do @
+    *
+    * @Autowired - quer dizer que aquele objeto sera instanciado a partir de injeção de dependencia (por isso aqui em
+    * nenhum lugar de se vê códigos do tipo "NomeDaClasse classe = new Classe()")
+    *
+    * @RequestMapping - mappings sao as rotas, caminhos, os '/qualquercoisa' que tem em todas as urls, nesse caso ele mostra
+    * que é o caminho base de tudo, toda rota dentro deste controller tera aquele início
+    *
+    * @GetMapping - quer dizer que aquele mapa é de metodo GET (ou seja, você irá buscar informações naquela rota, ela tem a intenção
+    * de realizar uma consulta por exemplo)
+    *
+    * @PostMapping - quer dizer que aquele mapata é de metodo POST (ou seja, voce irá mandar informações naquela rota, ela tem a intenção
+    * de realizar um insert por exemplo)
+    * */
+
     @Autowired
     Agenda agendaDAO;
 
