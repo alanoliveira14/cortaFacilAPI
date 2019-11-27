@@ -145,4 +145,52 @@ public class AgendaController {
 
     }
 
+    public void completaRespostaAgendaCliente(List<AgendaEntity> agenda){
+
+        for (AgendaEntity horario: agenda) {
+
+            CortesBarbeiroEntity byIdCorte = cortesBarbeiroDAO.findByIdCorte(horario.getIdCorte());
+
+            horario.setNomeCorte(byIdCorte.getNomeCorte());
+            horario.setPreco(byIdCorte.getPreco());
+
+        }
+
+    }
+
+
+    @GetMapping("/lista/futuros")
+    public ResponseEntity<Resposta> listaFuturosCortes(@RequestParam Integer idUsuario){
+
+        ClienteEntity byIdUsuario = clienteDAO.findByIdUsuario(idUsuario);
+
+        List<AgendaEntity> cortesFuturos = agendaDAO.findCortesFuturos(byIdUsuario.getIdCliente());
+
+        if(cortesFuturos != null && !cortesFuturos.isEmpty()){
+
+            this.completaRespostaAgendaCliente(cortesFuturos);
+
+            return new ResponseEntity<>(Resposta.builder()
+                    .object(cortesFuturos)
+                    .build(), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(Resposta.builder()
+                .mensagem("Sem cortes futuros")
+                .build(), HttpStatus.BAD_REQUEST);
+
+    }
+
+
+    @GetMapping("/apaga/agendamento")
+    public ResponseEntity<Resposta> apagarAgendamento(@RequestParam Integer idAgendamento){
+
+        agendaDAO.deleteByIdAgenda(idAgendamento);
+
+        return new ResponseEntity<>(Resposta.builder()
+                .mensagem("Agendamento cancelado")
+                .build(), HttpStatus.OK);
+
+    }
+
 }
