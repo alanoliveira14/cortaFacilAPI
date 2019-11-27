@@ -46,4 +46,28 @@ public class ClienteController {
     }
 
 
+    @GetMapping("/lista")
+    ResponseEntity<Resposta> pegaCliente(@RequestParam Integer idUsuario){
+
+        ClienteEntity byIdUsuario = clienteDAO.findByIdUsuario(idUsuario);
+
+
+        return new ResponseEntity<>(Resposta.builder()
+                .object(byIdUsuario)
+                .build(), HttpStatus.OK);
+
+    }
+
+
+    @PostMapping("/atualiza")
+    ResponseEntity<Resposta> atualiza(@RequestBody ClienteEntity clienteEntity){
+
+        clienteDAO.updateCliente(clienteEntity.getNome(), clienteEntity.getTelefone(), clienteEntity.getEmail(), clienteEntity.getIdUsuario());
+
+        return new ResponseEntity<>(Resposta.builder()
+                .mensagem("Atualizado")
+                .build(), HttpStatus.OK);
+
+    }
+
 }
