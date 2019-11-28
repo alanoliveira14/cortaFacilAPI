@@ -45,4 +45,6 @@ public class AgendaEntity {
 
     private Double preco;
 
+    private String nomeBarbearia;
+
 }

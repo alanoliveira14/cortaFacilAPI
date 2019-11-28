@@ -52,4 +52,9 @@ public interface Agenda extends JpaRepository<AgendaEntity, Integer> {
     @Modifying
     @Transactional
     void deleteByIdAgenda(Integer idAgenda);
+
+
+    @Query(value = "select * from agenda where idCliente = :idcliente and data < now() order by data desc , horaInicio desc limit 20", nativeQuery = true)
+    List<AgendaEntity> findExtratoCliente(@Param("idcliente") Integer idCliente);
+
 }

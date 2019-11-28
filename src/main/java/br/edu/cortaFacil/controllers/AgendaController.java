@@ -154,6 +154,10 @@ public class AgendaController {
             horario.setNomeCorte(byIdCorte.getNomeCorte());
             horario.setPreco(byIdCorte.getPreco());
 
+            BarbeiroEntity barbeiroEntityByIdBarbeiro = barbeiroDAO.findBarbeiroEntityByIdBarbeiro(horario.getIdBarbearia());
+
+            horario.setNomeBarbearia(barbeiroEntityByIdBarbeiro.getNomeBarbearia());
+
         }
 
     }
@@ -189,6 +193,21 @@ public class AgendaController {
 
         return new ResponseEntity<>(Resposta.builder()
                 .mensagem("Agendamento cancelado")
+                .build(), HttpStatus.OK);
+
+    }
+
+    @GetMapping("/extrato")
+    public ResponseEntity<Resposta> geraExtrato(@RequestParam Integer idUsuario){
+
+        ClienteEntity byIdUsuario = clienteDAO.findByIdUsuario(idUsuario);
+
+        List<AgendaEntity> extratoCliente = agendaDAO.findExtratoCliente(byIdUsuario.getIdCliente());
+
+        this.completaRespostaAgendaCliente(extratoCliente);
+
+        return new ResponseEntity<>(Resposta.builder()
+                .object(extratoCliente)
                 .build(), HttpStatus.OK);
 
     }
