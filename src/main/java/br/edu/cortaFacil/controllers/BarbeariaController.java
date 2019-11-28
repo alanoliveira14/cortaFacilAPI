@@ -183,6 +183,16 @@ public class BarbeariaController {
 
     }
 
+    @PostMapping("/corte/atualiza")
+    ResponseEntity<Resposta> atualizaCorte(@RequestBody CortesBarbeiroEntity cortesBarbeiroEntity){
+
+        cortesBarbeiroDAO.updateCorte(cortesBarbeiroEntity.getNomeCorte(), cortesBarbeiroEntity.getPreco(), cortesBarbeiroEntity.getTempoMedio(), cortesBarbeiroEntity.getDescricao(), cortesBarbeiroEntity.getIdCorte());
+
+        return new ResponseEntity<>(Resposta.builder()
+                .mensagem("Atualizado")
+                .build(), HttpStatus.OK);
+    }
+
 
 
 }
