@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -186,13 +187,45 @@ public class BarbeariaController {
     @PostMapping("/corte/atualiza")
     ResponseEntity<Resposta> atualizaCorte(@RequestBody CortesBarbeiroEntity cortesBarbeiroEntity){
 
-        cortesBarbeiroDAO.updateCorte(cortesBarbeiroEntity.getNomeCorte(), cortesBarbeiroEntity.getPreco(), cortesBarbeiroEntity.getTempoMedio(), cortesBarbeiroEntity.getDescricao(), cortesBarbeiroEntity.getIdCorte());
+        cortesBarbeiroDAO.updateCorte(cortesBarbeiroEntity.getNomeCorte(), cortesBarbeiroEntity.getPreco(), cortesBarbeiroEntity.getTempoMedio(), cortesBarbeiroEntity.getIdCorte());
 
         return new ResponseEntity<>(Resposta.builder()
                 .mensagem("Atualizado")
                 .build(), HttpStatus.OK);
     }
 
+    @PostMapping("/atualiza")
+    ResponseEntity<Resposta> atualizaBarbeiro(@RequestBody BarbeiroEntity barbeiroEntity) throws IOException {
+
+        BarbeiroEntity barbeiroEntityByIdUsuario = barbeiroDAO.findBarbeiroEntityByIdUsuario(barbeiroEntity.getIdUsuario());
+
+        barbeariaService.getEndereco(barbeiroEntity);
+
+        barbeiroDAO.updateBarbeiro(barbeiroEntity.getNomeBarbearia(), barbeiroEntity.getCep(), barbeiroEntity.getNumero(), barbeiroEntity.getTelefone(), barbeiroEntity.getCidade(), barbeiroEntity.getRua(), barbeiroEntity.getBairro(), barbeiroEntity.getUf(), barbeiroEntityByIdUsuario.getIdBarbeiro());
+
+        return new ResponseEntity<>(Resposta.builder()
+                .mensagem("Atualizado")
+                .build(), HttpStatus.OK);
+
+    }
+
+    @GetMapping("/busca/barbeiro")
+    ResponseEntity<Resposta> buscaBarbeiro(@RequestParam(value = "barbearia") Integer id){
 
 
+        BarbeiroEntity barbeiro = barbeiroDAO.findBarbeiroEntityByIdUsuario(id);
+
+        if(barbeiro == null || barbeiro.getIdBarbeiro() == null){
+            return new ResponseEntity<>(Resposta.builder()
+                    .erro(Error.builder()
+                            .mensagem("Erro interno")
+                            .build())
+                    .build(), HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(Resposta.builder()
+                .object(barbeiro)
+                .build(), HttpStatus.OK);
+
+    }
 }

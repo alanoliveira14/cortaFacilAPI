@@ -43,7 +43,7 @@ public class BarbeariaService {
 
     }
 
-    private void getEndereco(BarbeiroEntity barbeiroEntity) throws IOException {
+    public void getEndereco(BarbeiroEntity barbeiroEntity) throws IOException {
 
         StringBuilder url = new StringBuilder("https://viacep.com.br/ws/");
 

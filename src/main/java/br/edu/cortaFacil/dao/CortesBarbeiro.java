@@ -18,7 +18,7 @@ public interface CortesBarbeiro extends JpaRepository<CortesBarbeiroEntity, Inte
 
     @Modifying
     @Transactional
-    @Query(value = "update cortesBarbeiro set nomeCorte = :nomeCorte, preco = :preco, tempoMedio = :tempoMedio, descricao = :descricao where idCorte = :idCorte", nativeQuery = true)
-    void updateCorte(@Param("nomeCorte") String nomeCorte, @Param("preco") Double preco, @Param("tempoMedio") Integer tempoMedio, @Param("descricao") String descricao, @Param("idCorte") Integer idCorte);
+    @Query(value = "update cortesBarbeiro set nomeCorte = :nomeCorte, preco = :preco, tempoMedio = :tempoMedio where idCorte = :idCorte", nativeQuery = true)
+    void updateCorte(@Param("nomeCorte") String nomeCorte, @Param("preco") Double preco, @Param("tempoMedio") Integer tempoMedio, @Param("idCorte") Integer idCorte);
 
 }
