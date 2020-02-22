@@ -25,4 +25,10 @@ public interface Barbeiro extends JpaRepository<BarbeiroEntity, Integer> {
     @Query(value = "update barbeiro set nomeBarbearia = :nomeBarbearia, cep = :cep, numero = :numero, telefone = :telefone, cidade = :cidade, rua = :rua, bairro = :bairro, uf = :uf where idBarbeiro = :idBarbeiro", nativeQuery = true)
     void updateBarbeiro(@Param("nomeBarbearia") String nomeBarbearia, @Param("cep") String cep, @Param("numero") Integer numero, @Param("telefone") String telefone, @Param("cidade") String cidade, @Param("rua") String rua, @Param("bairro") String bairro, @Param("uf") String uf, @Param("idBarbeiro") Integer idBarbeiro);
 
+
+    @Query(value = "SELECT AVG(av.nota) FROM avaliacao av inner JOIN agenda ag inner join barbeiro on av.idAgenda = ag.idAgenda and ag.idBarbearia = barbeiro.idBarbeiro and barbeiro.idBarbeiro = :idBarbeiro", nativeQuery = true)
+    Double notaMediaBarbeiro(@Param("idBarbeiro") Integer idBarbeiro);
+
+    @Query(value = "select count(*) from agenda where idBarbearia = :idBarbeiro", nativeQuery = true)
+    Integer totalDeCortesBarbeiro(@Param("idBarbeiro") Integer idBarbeiro);
 }

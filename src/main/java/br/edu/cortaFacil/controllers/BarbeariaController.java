@@ -2,11 +2,15 @@ package br.edu.cortaFacil.controllers;
 
 import br.edu.cortaFacil.aux.Error;
 import br.edu.cortaFacil.aux.Resposta;
+import br.edu.cortaFacil.dao.Agenda;
 import br.edu.cortaFacil.dao.Barbeiro;
 import br.edu.cortaFacil.dao.CortesBarbeiro;
+import br.edu.cortaFacil.entity.BarbeiroComClassificacao;
 import br.edu.cortaFacil.entity.BarbeiroEntity;
 import br.edu.cortaFacil.entity.CortesBarbeiroEntity;
 import br.edu.cortaFacil.service.BarbeariaService;
+import br.edu.cortaFacil.service.ClassificacaoService;
+import com.google.common.collect.ComparisonChain;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +18,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -45,6 +51,12 @@ public class BarbeariaController {
 
     @Autowired
     BarbeariaService barbeariaService;
+
+    @Autowired
+    Agenda agendaDAO;
+
+    @Autowired
+    ClassificacaoService classificacaoService;
 
     @GetMapping("/lista/cidades")
     ResponseEntity<Resposta> barbeiroEntityResponseEntity(){
@@ -106,6 +118,8 @@ public class BarbeariaController {
 
         List<BarbeiroEntity> barbeiroEntityByCidadeLike = barbeiroDAO.findBarbeiroEntityByCidadeLike(cidade);
 
+        List<BarbeiroComClassificacao> barbeiroComClassificacaoList = new ArrayList<>();
+
         if(barbeiroEntityByCidadeLike == null || barbeiroEntityByCidadeLike.isEmpty()){
 
             return new ResponseEntity<>(Resposta.builder()
@@ -115,8 +129,29 @@ public class BarbeariaController {
                     .build(), HttpStatus.BAD_REQUEST);
         }
 
+
+        for (BarbeiroEntity b:barbeiroEntityByCidadeLike) {
+            BarbeiroComClassificacao classificado = new BarbeiroComClassificacao(b);
+            classificado.setClassificacaoEntity(classificacaoService.classificaBarbearia(b.getIdBarbeiro()));
+            barbeiroComClassificacaoList.add(classificado);
+        }
+
+        Collections.sort(barbeiroComClassificacaoList, new Comparator<BarbeiroComClassificacao>() {
+            @Override
+            public int compare(BarbeiroComClassificacao barbeiroComClassificacao, BarbeiroComClassificacao t1) {
+//                return Double.compare(t1.getClassificacaoEntity().getNota(), barbeiroComClassificacao.getClassificacaoEntity().getNota());
+//                return barbeiroComClassificacao.getClassificacaoEntity().getRanking().compareTo(t1.getClassificacaoEntity().getRanking());
+
+                return ComparisonChain.start()
+                        .compare(barbeiroComClassificacao.getClassificacaoEntity().getRanking() ,t1.getClassificacaoEntity().getRanking())
+                        .compare(t1.getClassificacaoEntity().getNota(), barbeiroComClassificacao.getClassificacaoEntity().getNota())
+                        .result();
+
+            }
+        });
+
         return new ResponseEntity<>(Resposta.builder()
-                .object(barbeiroEntityByCidadeLike)
+                .object(barbeiroComClassificacaoList)
                 .build(), HttpStatus.OK);
 
     }

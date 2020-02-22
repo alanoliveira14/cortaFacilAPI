@@ -62,4 +62,7 @@ public interface Agenda extends JpaRepository<AgendaEntity, Integer> {
     @Query(value = "update agenda set flgAval = 1 where idAgenda = :idAgenda", nativeQuery = true)
     void updateFlagAgenda(@Param("idAgenda") Integer idAgenda);
 
+    @Query(value = "select (select count(*) from agenda) / (select count(distinct idBarbearia) from agenda) as mediaCortes", nativeQuery = true)
+    Integer mediaDeCortesGeral();
+
 }
