@@ -57,4 +57,9 @@ public interface Agenda extends JpaRepository<AgendaEntity, Integer> {
     @Query(value = "select * from agenda where idCliente = :idcliente and data < now() order by data desc , horaInicio desc limit 20", nativeQuery = true)
     List<AgendaEntity> findExtratoCliente(@Param("idcliente") Integer idCliente);
 
+    @Modifying
+    @Transactional
+    @Query(value = "update agenda set flgAval = 1 where idAgenda = :idAgenda", nativeQuery = true)
+    void updateFlagAgenda(@Param("idAgenda") Integer idAgenda);
+
 }
