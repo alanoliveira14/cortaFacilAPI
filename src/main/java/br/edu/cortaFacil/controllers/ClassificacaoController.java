@@ -2,7 +2,9 @@ package br.edu.cortaFacil.controllers;
 
 import br.edu.cortaFacil.aux.Resposta;
 import br.edu.cortaFacil.dao.Agenda;
+import br.edu.cortaFacil.dao.Avaliacao;
 import br.edu.cortaFacil.dao.Barbeiro;
+import br.edu.cortaFacil.entity.AvaliacaoEntity;
 import br.edu.cortaFacil.entity.ClassificacaoEntity;
 import br.edu.cortaFacil.service.ClassificacaoService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author : agoliveira 02/2020
@@ -30,14 +34,15 @@ public class ClassificacaoController {
     Barbeiro barbeiroDAO;
 
     @Autowired
+    Avaliacao avaliacao;
+
+    @Autowired
     ClassificacaoService classificacaoService;
 
 
     @GetMapping("/teste")
     public void teste(){
-        Integer a =agendaDAO.mediaDeCortesGeral();
 
-        System.out.println(a);
 
     }
 

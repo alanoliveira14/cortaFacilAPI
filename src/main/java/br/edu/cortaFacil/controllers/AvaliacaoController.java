@@ -5,12 +5,16 @@ import br.edu.cortaFacil.aux.Resposta;
 import br.edu.cortaFacil.dao.Agenda;
 import br.edu.cortaFacil.dao.Avaliacao;
 import br.edu.cortaFacil.entity.AvaliacaoEntity;
+import br.edu.cortaFacil.entity.NotasDeAvaliacao;
 import br.edu.cortaFacil.service.AvaliacaoService;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author : agoliveira 02/2020
@@ -49,5 +53,28 @@ public class AvaliacaoController {
                 .mensagem("Avaliação realizada com sucesso!")
                 .build(), HttpStatus.OK);
     }
+
+    @GetMapping("/notas/avaliacao")
+    ResponseEntity<Resposta>notasDeAvaliacao(Integer idBarbearia){
+
+        List<NotasDeAvaliacao> notasDeAvaliacao = avaliacaoService.notasDeAvaliacao(idBarbearia);
+
+
+        return new ResponseEntity<>(Resposta.builder()
+                .object(notasDeAvaliacao)
+                .build(), HttpStatus.OK);
+    }
+
+    @GetMapping("/comentarios/lista")
+    ResponseEntity<Resposta>comentariosDoBarbeiro(Integer idBarbeiro){
+
+        List<AvaliacaoEntity> avaliacaoEntities = avaliacaoDAO.listaComentariosDaBarbearia(idBarbeiro);
+
+        return new ResponseEntity<>(Resposta.builder()
+                .object(avaliacaoEntities)
+                .build(), HttpStatus.OK);
+
+    }
+
 
 }
