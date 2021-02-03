@@ -1,7 +1,7 @@
 package br.edu.cortaFacil.controllers;
 
-import br.edu.cortaFacil.aux.Error;
-import br.edu.cortaFacil.aux.Resposta;
+import br.edu.cortaFacil.auxiliar.Error;
+import br.edu.cortaFacil.auxiliar.Resposta;
 import br.edu.cortaFacil.dao.Cliente;
 import br.edu.cortaFacil.entity.ClienteEntity;
 import lombok.extern.slf4j.Slf4j;

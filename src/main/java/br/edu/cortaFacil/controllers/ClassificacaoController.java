@@ -1,10 +1,9 @@
 package br.edu.cortaFacil.controllers;
 
-import br.edu.cortaFacil.aux.Resposta;
+import br.edu.cortaFacil.auxiliar.Resposta;
 import br.edu.cortaFacil.dao.Agenda;
 import br.edu.cortaFacil.dao.Avaliacao;
 import br.edu.cortaFacil.dao.Barbeiro;
-import br.edu.cortaFacil.entity.AvaliacaoEntity;
 import br.edu.cortaFacil.entity.ClassificacaoEntity;
 import br.edu.cortaFacil.service.ClassificacaoService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @author : agoliveira 02/2020

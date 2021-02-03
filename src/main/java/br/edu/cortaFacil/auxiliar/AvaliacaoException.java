@@ -1,4 +1,4 @@
-package br.edu.cortaFacil.aux;
+package br.edu.cortaFacil.auxiliar;
 
 /**
  * @author : agoliveira 02/2020

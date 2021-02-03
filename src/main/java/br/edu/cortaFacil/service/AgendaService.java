@@ -1,7 +1,7 @@
 package br.edu.cortaFacil.service;
 
-import br.edu.cortaFacil.aux.AgendaException;
-import br.edu.cortaFacil.aux.Utils;
+import br.edu.cortaFacil.auxiliar.AgendaException;
+import br.edu.cortaFacil.auxiliar.Utils;
 import br.edu.cortaFacil.dao.Agenda;
 import br.edu.cortaFacil.dao.CortesBarbeiro;
 import br.edu.cortaFacil.entity.AgendaEntity;
