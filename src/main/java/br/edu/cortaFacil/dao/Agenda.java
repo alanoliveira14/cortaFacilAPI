@@ -41,7 +41,7 @@ public interface Agenda extends JpaRepository<AgendaEntity, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO agenda(idCliente, idBarbearia, idCorte, data, horaInicio, horaFim) values(:idCliente, :idBarbearia, :idCorte, :dataCorte, :horaInicio, (select addtime(:horaInicio, sec_to_time(:tempoCorte * 60) ) ) ) ", nativeQuery = true)
+    @Query(value = "INSERT INTO agenda(idCliente, idBarbearia, idCorte, data, horaInicio, horaFim, flgAval) values(:idCliente, :idBarbearia, :idCorte, :dataCorte, :horaInicio, (select addtime(:horaInicio, sec_to_time(:tempoCorte * 60) ) ), 0 ) ", nativeQuery = true)
     void insertNovo(@Param("idCliente") Integer idCliente, @Param("idBarbearia") Integer idBarbearia, @Param("idCorte") Integer idCorte, @Param("dataCorte") String dataCorte, @Param("horaInicio") String horaIniciio, @Param("tempoCorte") Integer tempoCorte);
 
 

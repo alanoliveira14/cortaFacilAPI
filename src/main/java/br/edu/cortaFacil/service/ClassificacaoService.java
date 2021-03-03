@@ -51,6 +51,7 @@ public class ClassificacaoService {
 
         totalDeCortes = totalDeCortes == null ? 0 : totalDeCortes;
         notaMediaBarbeiro = notaMediaBarbeiro == null ? 0.0 : notaMediaBarbeiro;
+        mediaCortesGeral = mediaCortesGeral == null ? 0 : mediaCortesGeral;
 
         if(totalDeCortes <= ((int) mediaCortesGeral * 0.7)){
             classificacaoEntity.setClassificacao(CLASSIFICACAO_BARBEIRO.BRONZE.toString());
