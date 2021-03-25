@@ -1,7 +1,7 @@
 package br.edu.cortaFacil.controllers;
 
-import br.edu.cortaFacil.aux.Error;
-import br.edu.cortaFacil.aux.Resposta;
+import br.edu.cortaFacil.auxiliar.Error;
+import br.edu.cortaFacil.auxiliar.Resposta;
 import br.edu.cortaFacil.dao.Agenda;
 import br.edu.cortaFacil.dao.Barbeiro;
 import br.edu.cortaFacil.dao.CortesBarbeiro;

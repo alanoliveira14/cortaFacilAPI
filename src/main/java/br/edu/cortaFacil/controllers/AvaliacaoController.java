@@ -1,13 +1,12 @@
 package br.edu.cortaFacil.controllers;
 
-import br.edu.cortaFacil.aux.Error;
-import br.edu.cortaFacil.aux.Resposta;
+import br.edu.cortaFacil.auxiliar.Error;
+import br.edu.cortaFacil.auxiliar.Resposta;
 import br.edu.cortaFacil.dao.Agenda;
 import br.edu.cortaFacil.dao.Avaliacao;
 import br.edu.cortaFacil.entity.AvaliacaoEntity;
 import br.edu.cortaFacil.entity.NotasDeAvaliacao;
 import br.edu.cortaFacil.service.AvaliacaoService;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

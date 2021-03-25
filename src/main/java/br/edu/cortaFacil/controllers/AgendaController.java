@@ -1,8 +1,8 @@
 package br.edu.cortaFacil.controllers;
 
 
-import br.edu.cortaFacil.aux.Error;
-import br.edu.cortaFacil.aux.Resposta;
+import br.edu.cortaFacil.auxiliar.Error;
+import br.edu.cortaFacil.auxiliar.Resposta;
 import br.edu.cortaFacil.dao.Agenda;
 import br.edu.cortaFacil.dao.Barbeiro;
 import br.edu.cortaFacil.dao.Cliente;
@@ -18,7 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;

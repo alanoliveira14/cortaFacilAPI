@@ -1,12 +1,11 @@
 package br.edu.cortaFacil.service;
 
-import br.edu.cortaFacil.aux.AvaliacaoException;
+import br.edu.cortaFacil.auxiliar.AvaliacaoException;
 import br.edu.cortaFacil.dao.Agenda;
 import br.edu.cortaFacil.dao.Avaliacao;
 import br.edu.cortaFacil.entity.AvaliacaoEntity;
 import br.edu.cortaFacil.entity.NotasDeAvaliacao;
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,13 +1,11 @@
 package br.edu.cortaFacil.service;
 
-import br.edu.cortaFacil.aux.UsuarioIndisponivelException;
-import br.edu.cortaFacil.aux.Utils;
+import br.edu.cortaFacil.auxiliar.UsuarioIndisponivelException;
+import br.edu.cortaFacil.auxiliar.Utils;
 import br.edu.cortaFacil.dao.Usuario;
 import br.edu.cortaFacil.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 
 @Component
 public class UsuarioService {

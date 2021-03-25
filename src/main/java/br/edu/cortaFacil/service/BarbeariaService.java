@@ -1,6 +1,6 @@
 package br.edu.cortaFacil.service;
 
-import br.edu.cortaFacil.aux.Logradouro;
+import br.edu.cortaFacil.auxiliar.Logradouro;
 import br.edu.cortaFacil.dao.Barbeiro;
 import br.edu.cortaFacil.dao.CortesBarbeiro;
 import br.edu.cortaFacil.dao.Usuario;

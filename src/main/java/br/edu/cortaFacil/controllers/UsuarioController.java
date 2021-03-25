@@ -1,9 +1,9 @@
 package br.edu.cortaFacil.controllers;
 
-import br.edu.cortaFacil.aux.Error;
-import br.edu.cortaFacil.aux.Resposta;
-import br.edu.cortaFacil.aux.UsuarioIndisponivelException;
-import br.edu.cortaFacil.aux.Utils;
+import br.edu.cortaFacil.auxiliar.Error;
+import br.edu.cortaFacil.auxiliar.Resposta;
+import br.edu.cortaFacil.auxiliar.UsuarioIndisponivelException;
+import br.edu.cortaFacil.auxiliar.Utils;
 import br.edu.cortaFacil.dao.Usuario;
 import br.edu.cortaFacil.entity.UsuarioEntity;
 import br.edu.cortaFacil.service.UsuarioService;

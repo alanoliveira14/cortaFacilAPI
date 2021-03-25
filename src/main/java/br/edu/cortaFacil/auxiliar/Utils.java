@@ -1,4 +1,4 @@
-package br.edu.cortaFacil.aux;
+package br.edu.cortaFacil.auxiliar;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

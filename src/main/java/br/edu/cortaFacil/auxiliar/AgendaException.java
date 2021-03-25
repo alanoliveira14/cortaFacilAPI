@@ -1,4 +1,4 @@
-package br.edu.cortaFacil.aux;
+package br.edu.cortaFacil.auxiliar;
 
 public class AgendaException extends Exception {
 
